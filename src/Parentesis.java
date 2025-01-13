@@ -22,6 +22,7 @@ public class Parentesis {
                     }
                 }
 
+
             }
             if (i == frase.length() - 1) {
                 if (parentesis.isEmpty()) {
