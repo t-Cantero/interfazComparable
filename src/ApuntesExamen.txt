@@ -1,0 +1,398 @@
+# Apuntes sobre Java
+
+## 1. List
+Una **List** en Java es una colección ordenada que permite elementos duplicados. Las listas son parte de la interfaz **java.util.List** y se implementan comúnmente mediante **ArrayList** o **LinkedList**.
+
+### Características:
+- Permite elementos duplicados.
+- Los elementos tienen un orden específico.
+- Puede accederse a los elementos por índice.
+
+### Métodos principales:
+- `add(E e)`: Agrega un elemento al final de la lista.
+- `add(int index, E element)`: Inserta un elemento en una posición específica.
+- `get(int index)`: Obtiene el elemento en la posición indicada.
+- `remove(int index)`: Elimina el elemento en la posición indicada.
+- `set(int index, E element)`: Reemplaza el elemento en la posición indicada.
+- `size()`: Devuelve el tamaño de la lista.
+- `contains(Object o)`: Verifica si un elemento está en la lista.
+
+### Ejemplo:
+```java
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) {
+        List<String> lista = new ArrayList<>();
+        lista.add("Elemento 1");
+        lista.add("Elemento 2");
+        lista.add(1, "Elemento en posición 1");
+
+        for (String elem : lista) {
+            System.out.println(elem);
+        }
+    }
+}
+```
+
+---
+
+## 2. ArrayList
+**ArrayList** es una implementación de la interfaz **List** basada en un array redimensionable.
+
+### Características:
+- Crece dinámicamente cuando se supera su capacidad inicial.
+- Acceso rápido a los elementos por índice.
+- No es sincronizada (no es segura para múltiples hilos).
+
+### Métodos principales:
+- `add(E e)`: Agrega un elemento al final.
+- `remove(int index)`: Elimina un elemento por índice.
+- `clear()`: Limpia todos los elementos de la lista.
+- `isEmpty()`: Verifica si la lista está vacía.
+- `indexOf(Object o)`: Devuelve la posición de un elemento.
+
+### Ejemplo:
+```java
+import java.util.ArrayList;
+
+public class Main {
+    public static void main(String[] args) {
+        ArrayList<Integer> numeros = new ArrayList<>();
+        numeros.add(10);
+        numeros.add(20);
+        numeros.add(30);
+
+        for (int numero : numeros) {
+            System.out.println(numero);
+        }
+    }
+}
+```
+
+---
+
+## 3. LinkedList
+**LinkedList** es una implementación de la interfaz **List** basada en una lista doblemente enlazada.
+
+### Características:
+- Es eficiente para insertar y eliminar elementos en cualquier posición.
+- Implementa las interfaces **List**, **Deque**, y **Queue**.
+
+### Métodos principales:
+- `addFirst(E e)`: Agrega un elemento al inicio.
+- `addLast(E e)`: Agrega un elemento al final.
+- `removeFirst()`: Elimina el primer elemento.
+- `removeLast()`: Elimina el último elemento.
+- `getFirst()`: Obtiene el primer elemento.
+- `getLast()`: Obtiene el último elemento.
+
+### Ejemplo:
+```java
+import java.util.LinkedList;
+
+public class Main {
+    public static void main(String[] args) {
+        LinkedList<String> lista = new LinkedList<>();
+        lista.add("A");
+        lista.add("B");
+        lista.addFirst("Inicio");
+        lista.addLast("Fin");
+
+        for (String elem : lista) {
+            System.out.println(elem);
+        }
+    }
+}
+```
+
+---
+
+## 4. Colas (Queues)
+Una **cola** en Java es una estructura FIFO (First-In-First-Out). Se implementa mediante la interfaz **Queue**.
+
+### Características:
+- Los elementos se insertan al final y se eliminan desde el principio.
+- Se utiliza comúnmente para procesar tareas en orden.
+
+### Métodos principales:
+- `offer(E e)`: Agrega un elemento al final de la cola.
+- `poll()`: Recupera y elimina el primer elemento de la cola.
+- `peek()`: Recupera el primer elemento sin eliminarlo.
+
+### Ejemplo:
+```java
+import java.util.LinkedList;
+import java.util.Queue;
+
+public class Main {
+    public static void main(String[] args) {
+        Queue<String> cola = new LinkedList<>();
+        cola.offer("Elemento 1");
+        cola.offer("Elemento 2");
+        cola.offer("Elemento 3");
+
+        while (!cola.isEmpty()) {
+            System.out.println("Procesando: " + cola.poll());
+        }
+    }
+}
+```
+
+---
+
+## 5. Pilas (Stacks)
+Una **pila** es una estructura LIFO (Last-In-First-Out). Se puede usar la clase **Stack** o una **Deque**.
+
+### Métodos principales (con `Stack`):
+- `push(E e)`: Inserta un elemento en la parte superior de la pila.
+- `pop()`: Elimina y devuelve el elemento en la parte superior.
+- `peek()`: Devuelve el elemento en la parte superior sin eliminarlo.
+- `isEmpty()`: Verifica si la pila está vacía.
+
+### Ejemplo:
+```java
+import java.util.Stack;
+
+public class Main {
+    public static void main(String[] args) {
+        Stack<Integer> pila = new Stack<>();
+        pila.push(1);
+        pila.push(2);
+        pila.push(3);
+
+        while (!pila.isEmpty()) {
+            System.out.println("Sacando: " + pila.pop());
+        }
+    }
+}
+```
+
+---
+
+## 6. BufferedReader
+**BufferedReader** se usa para leer texto de una fuente de entrada de manera eficiente (por ejemplo, archivos o consola).
+
+### Características:
+- Se utiliza para leer grandes volúmenes de datos.
+- Puede leer línea por línea.
+
+### Métodos principales:
+- `readLine()`: Lee una línea completa de texto.
+- `close()`: Cierra el flujo.
+
+### Ejemplo con consola:
+```java
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
+
+public class Main {
+    public static void main(String[] args) {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+        try {
+            System.out.println("Ingrese su nombre: ");
+            String nombre = reader.readLine();
+            System.out.println("Hola, " + nombre + "!");
+        } catch (IOException e) {
+            System.out.println("Error al leer entrada");
+        }
+    }
+}
+```
+
+### Ejemplo con archivos:
+```java
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
+public class Main {
+    public static void main(String[] args) {
+        try (BufferedReader br = new BufferedReader(new FileReader("archivo.txt"))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                System.out.println(linea);
+            }
+        } catch (IOException e) {
+            System.out.println("Error al leer el archivo: " + e.getMessage());
+        }
+    }
+}
+```
+
+---
+
+## 7. TreeMap
+**TreeMap** es una implementación de la interfaz **Map** que ordena sus claves de manera natural o según un comparador especificado.
+
+### Características:
+- Mantiene las claves ordenadas.
+- No permite claves duplicadas.
+
+### Métodos principales:
+- `put(K key, V value)`: Agrega una clave y su valor asociado.
+- `get(Object key)`: Recupera el valor asociado a una clave.
+- `remove(Object key)`: Elimina una clave y su valor.
+- `containsKey(Object key)`: Verifica si una clave existe.
+- `firstKey()`: Devuelve la primera clave.
+- `lastKey()`: Devuelve la última clave.
+
+### Ejemplo:
+```java
+import java.util.TreeMap;
+
+public class Main {
+    public static void main(String[] args) {
+        TreeMap<Integer, String> mapa = new TreeMap<>();
+        mapa.put(3, "Tres");
+        mapa.put(1, "Uno");
+        mapa.put(2, "Dos");
+
+        for (Integer clave : mapa.keySet()) {
+            System.out.println("Clave: " + clave + ", Valor: " + mapa.get(clave));
+        }
+    }
+}
+```
+
+---
+
+1. Clases en Java
+
+Las clases son los bloques básicos de la programación orientada a objetos en Java. Una clase define un modelo o plantilla para crear objetos (instancias).
+Estructura básica de una clase
+
+public class Persona {
+    // Atributos
+    private String nombre;
+    private int edad;
+
+    // Constructor
+    public Persona(String nombre, int edad) {
+        this.nombre = nombre;
+        this.edad = edad;
+    }
+
+    // Métodos (Getters y Setters)
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public int getEdad() {
+        return edad;
+    }
+
+    public void setEdad(int edad) {
+        this.edad = edad;
+    }
+
+    // Método personalizado
+    public void saludar() {
+        System.out.println("Hola, mi nombre es " + nombre + " y tengo " + edad + " años.");
+    }
+}
+
+Comandos clave relacionados con clases
+
+    Definir una clase: class NombreDeClase { ... }
+    Crear un objeto: Persona persona1 = new Persona("Juan", 25);
+    Acceder a métodos: persona1.saludar();
+    Modificar atributos mediante setters: persona1.setEdad(26);
+
+2. Streams en Java
+
+Los streams son una característica introducida en Java 8 que facilita el procesamiento de datos de forma declarativa. Se usan para trabajar con colecciones y secuencias de datos de manera eficiente.
+Operaciones comunes con streams
+
+Los streams permiten:
+
+    Filtrar (filter): Seleccionar elementos según un criterio.
+    Transformar (map): Convertir elementos de una forma a otra.
+    Ordenar (sorted): Ordenar elementos.
+    Reducir (reduce): Combinar elementos en un único resultado.
+    Coleccionar (collect): Convertir un stream en una colección.
+
+Ejemplo básico de un stream
+
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class EjemploStream {
+    public static void main(String[] args) {
+        List<String> nombres = Arrays.asList("Juan", "Ana", "Luis", "Carlos");
+
+        // Filtrar nombres que comienzan con 'A'
+        List<String> filtrados = nombres.stream()
+                                        .filter(nombre -> nombre.startsWith("A"))
+                                        .collect(Collectors.toList());
+
+        System.out.println(filtrados); // Output: [Ana]
+    }
+}
+
+Comandos clave relacionados con streams
+
+    Crear un stream: stream() (para listas y colecciones).
+    Filtrar datos: .filter(condición)
+    Transformar datos: .map(función)
+    Coleccionar resultados: .collect(Collectors.toList())
+
+3. Relación entre Clases y Streams
+
+Es común usar streams para procesar listas de objetos creados a partir de clases. Por ejemplo, podrías tener una lista de objetos de tipo Persona y usar streams para filtrar o procesar los datos.
+Ejemplo práctico
+
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class Main {
+    public static void main(String[] args) {
+        // Crear una lista de objetos Persona
+        List<Persona> personas = Arrays.asList(
+            new Persona("Juan", 25),
+            new Persona("Ana", 30),
+            new Persona("Luis", 22),
+            new Persona("Carlos", 40)
+        );
+
+        // Filtrar personas mayores de 25 años
+        List<Persona> mayoresDe25 = personas.stream()
+                                            .filter(persona -> persona.getEdad() > 25)
+                                            .collect(Collectors.toList());
+
+        // Imprimir nombres de las personas filtradas
+        mayoresDe25.forEach(persona -> System.out.println(persona.getNombre()));
+    }
+}
+
+// Clase Persona
+class Persona {
+    private String nombre;
+    private int edad;
+
+    public Persona(String nombre, int edad) {
+        this.nombre = nombre;
+        this.edad = edad;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public int getEdad() {
+        return edad;
+    }
+}
+
+Comandos clave combinando clases y streams
+
+    Crear lista de objetos: List<Persona> personas = Arrays.asList(...);
+    Filtrar con streams: .filter(objeto -> condición)
+    Transformar propiedades: .map(objeto -> objeto.propiedad)
+    Imprimir con forEach: .forEach(System.out::println)
